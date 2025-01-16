@@ -2,9 +2,19 @@ from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 import time
+import os
+from dotenv import load_dotenv
 
-endpoint = "ENTER ENDPOINT HERE"
-key = "ENTER KEY HERE"
+# Load environment variables from .env file
+load_dotenv()
+
+# Get API credentials from environment variables
+endpoint = os.getenv("API_ENDPOINT")
+key = os.getenv("API_KEY")
+
+# Check if credentials were loaded successfully
+if endpoint is None or key is None:
+    raise ValueError("API_ENDPOINT or API_KEY not found in .env file")
 
 credentials = CognitiveServicesCredentials(key)
 
